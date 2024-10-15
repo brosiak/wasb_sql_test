@@ -49,6 +49,7 @@ final as (
     FROM employees_with_managers_name e
     LEFT JOIN employees_expenses ee ON e.employee_id = ee.employee_id
     WHERE ee.employee_id is not null
+    ORDER BY total_expensed_amount DESC
 )
 
 SELECT * FROM final;

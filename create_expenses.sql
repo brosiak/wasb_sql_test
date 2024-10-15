@@ -1,5 +1,7 @@
 USE memory.default;
 
+DROP TABLE IF EXISTS EXPENSE;
+
 CREATE TABLE IF NOT EXISTS EXPENSE(
     employee_id TINYINT,
     unit_price DECIMAL(8, 2),
