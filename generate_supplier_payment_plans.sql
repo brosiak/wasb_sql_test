@@ -54,12 +54,12 @@ final as (
     SELECT
         supplier_id,
         name as supplier_name,
-        monthly_payment,
-        due_date,
-        SUM(monthly_payment) OVER (PARTITION BY supplier_id ORDER BY due_date DESC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) - monthly_payment AS total_invoice_amount
+        monthly_payment as payment_amount,
+        due_date as payment_date,
+        SUM(monthly_payment) OVER (PARTITION BY supplier_id ORDER BY due_date DESC ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) - monthly_payment AS balance_outstanding
     FROM invoices_plan
     JOIN suppliers using(supplier_id)
 
 )
 
-SELECT * FROM final ORDER BY supplier_id, due_date;
+SELECT * FROM final ORDER BY supplier_id, payment_date;
